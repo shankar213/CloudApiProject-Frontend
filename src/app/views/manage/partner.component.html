@@ -1,0 +1,29 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark nav-bar-background" [containerInside]="false">
+  <mdb-navbar-brand><a class="navbar-brand" href="#"><h3>Products</h3></a></mdb-navbar-brand>
+  <links>
+
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/public">Home<span
+          class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/manage">Manage Products<span class="sr-only"></span></a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item waves-light" mdbWavesEffect>
+        <a class="nav-link">Register</a>
+      </li>
+      <li class="nav-item waves-light" mdbWavesEffect>
+        <a class="nav-link">Login</a>
+      </li>
+    </ul>
+  </links>
+
+</mdb-navbar>
+<main class="pb-2">
+  <router-outlet></router-outlet>
+</main>
+
+

@@ -1,0 +1,102 @@
+<div class="row product-filters">
+  <div class="col-md-8 align-self-center"><h1> Products </h1></div>
+
+
+  <div class="col-md-4 align-self-center">
+    <div class="md-form">
+      <select class="browser-default custom-select md-select col xs-6" name="category" [(ngModel)]="filter.category"
+              #category="ngModel" (ngModelChange)="onCategorySelected($event)">
+        <option selected="" value="" required="">Select Category</option>
+        <option>Computer and Accessory</option>
+        <option>Clothes</option>
+        <option>Shoes</option>
+        <option>Cosmetics</option>
+        <option>Home Appliances</option>
+        <option>Grocery</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+
+<div class="row justify-content-md-center">
+
+  <div *ngIf="product_count === 0">
+    <h2>No Products found!</h2>
+  </div>
+
+  <div class="col col-lg-3 col-md-3 col-sm-4" *ngFor="let product of products" style="margin-top: 10px">
+
+    <div class="card">
+      <div class="card-body">
+        <div (click)="fetchProduct(product.id, frame) ">
+          <img class="card-img-top img-size" src="{{product.images[0]}}"
+               alt="Card image cap">
+          <h4 class="card-title item-title"><a>{{product.name}}</a></h4>
+          <label class="card-title item-brand"><a>{{product.brand}}</a></label>
+        </div>
+        <div class="row">
+          <div class="col-md-6 ">
+            <button class="btn btn-primary cart-btn">Add To Cart</button>
+          </div>
+          <div class="col-md-6 text-right"><h4 class="card-title text-success">$ {{product.price}}</h4></div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div mdbModal #frame="mdbModal" class="modal fade" id="frameModalTop" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document" *ngIf="selectedProduct">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-5">
+            <mdb-carousel [isControls]="true" [animation]="'slide'">
+              <mdb-slide *ngFor="let image of selectedProduct.images ">
+                <img class="d-block w-100" src="{{image}}"
+                     alt="First slide">
+              </mdb-slide>
+            </mdb-carousel>
+          </div>
+          <div class="col-lg-7">
+            <h2 class="h2-responsive product-name">
+              <strong>{{selectedProduct.name}}</strong>
+            </h2>
+            <h4 class="h4-responsive">
+              <span class="green-text">
+                <strong>${{selectedProduct.price}}</strong>
+              </span>
+            </h4>
+
+            <div> {{ selectedProduct.brand }} </div>
+            <div class="card-body">
+              <div class="text-center">
+
+                <button type="button" mdbBtn color="secondary" class="waves-light" mdbWavesEffect (click)="frame.hide()"
+                        data-dismiss="modal">Close
+                </button>
+                <button class="btn btn-primary cart-btn">Add To Cart
+                  <mdb-icon fas icon="cart-plus" class="ml-2" aria-hidden="true"></mdb-icon>
+                </button>
+              </div>
+            </div>
+            <!-- /.Add to Cart -->
+          </div>
+          <div class="col-lg-12">
+            <h3>Product Details</h3>
+            <div> {{ selectedProduct.description }} </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
